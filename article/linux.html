@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<link rel="stylesheet" href="/_assets/main.css" />
+
+    <title>Linux 疑难杂症解决方法 - 首页</title>
+  <link rel="stylesheet" href="/_markdown_plugin_assets/highlight.js/atom-one-light.css" /></head>
+  <body>
+    <div class="main">
+      <nav class="navigation">
+        <a href="/">首页</a>
+      </nav>
+      <article>
+        <header>
+          <h1 class="article-title">Linux 疑难杂症解决方法</h1>
+          <div class="article-info">
+            <div>
+              <span
+                >Created At：<time datetime="1709201598227"
+                  >2024-02-29 18:13</time
+                ></span
+              >
+              <span
+                >Updated At：<time datetime="1710931808226"
+                  >2024-03-20 18:50</time
+                ></span
+              >
+            </div>
+            
+          </div>
+        </header>
+        <div class="article-content markdown-body"><h1 id="inux磁盘管理-lsblk和df-h显示的磁盘信息不一致怎么办">inux磁盘管理 lsblk和df -h显示的磁盘信息不一致怎么办？</h1>
+<p>lsblk 查看的是block device,也就是逻辑磁盘大小。</p>
+<p>df查看的是file system, 也就是文件系统层的磁盘大小。</p>
+<p>你的这种情况应该是block device容量变大，单还没有反映到file system中。如果是ext{2,3,4}文件系统的话，可以用resize2fs 命令来更新。</p>
+<div><pre class="hljs"><code>resize2fs <span class="hljs-regexp">/dev/</span>vda2</code></pre></div>
+<p>如果是xfs文件系统的话，用xfs_growfs更新</p>
+<div><pre class="hljs"><code>xfs_growfs <span class="hljs-regexp">/dev/</span>vda2</code></pre></div>
+<h1 id="linux-防火墙-firewalld-无法禁用-docker-端口映射">Linux 防火墙 firewalld 无法禁用 Docker 端口映射</h1>
+<p>当我们部署容器时，docker 都有要求端口映射，但是 docker的端口映射会越过我们服务器的防火墙，防火墙不能禁止端口，导致别人可以通过 ip:端口来访问我的项目。</p>
+<p>那么如何控制 Docker 容器的端口访问？</p>
+<p><strong>博主只提供最简单的方法，博主不是专业运维人员，我只是简单的在docker下载 别人的项目来搭建，设个反向代理不想暴露服务器 ip 地址就这样而已，只是简单的使用 docker 的同学可以参考我的方法。</strong></p>
+<h2 id="使用-1panel-服务器运维管理面板">使用 1panel 服务器运维管理面板</h2>
+<p>打开<strong>容器设置</strong>，编辑要禁止端口的容器，将<strong>端口</strong>设置的服务器地址设置为本地 ip 地址：127.0.0.1，端口不变，点击确定重建容器。</p>
+<h2 id="操作视频">操作视频</h2>
+<p>录了个视频如何使用 1panel 禁止 docker 端口映射来拒绝 ip:端口访问面板。
+<a title="https://ltld-my.sharepoint.com/:v:/g/personal/linyoude_ltld_onmicrosoft_com/EXydXPwJGEhEtkcHFQ-v4gABOiS0laQVUaBs1UdsmGe7zw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&amp;e=8yzDfc" href="https://ltld-my.sharepoint.com/:v:/g/personal/linyoude_ltld_onmicrosoft_com/EXydXPwJGEhEtkcHFQ-v4gABOiS0laQVUaBs1UdsmGe7zw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&amp;e=8yzDfc">视频链接</a></p>
+<h2 id="结尾">结尾</h2>
+<p>没想到这么简单，搜了一下午都解决不了，当然我是小白，什么命令代码都不会，但是对于普通人简单玩玩服务器使用一个<strong>管理面板</strong>能更有效率，或者说门槛变轻松了。这里推荐大家使用 <a title="https://1panel.cn/" href="https://1panel.cn/">1panel</a>，如果经常使用 docker 的话，特别好用。</p>
+</div>
+      </article>
+    </div>
+  </body>
+</html>
